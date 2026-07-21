@@ -60,7 +60,7 @@ independent chains per `k` value). Reduce `n_chains` for a quick sanity check
 of the qualitative behavior; the underlying theory doesn't change, only the
 Monte Carlo noise floor.
 
-## Citation
+<!-- ## Citation
 
 If you use this code, please cite:
 
@@ -73,7 +73,7 @@ If you use this code, please cite:
   year    = {2026},
   note    = {under review}
 }
-```
+``` -->
 
 
 ## License
