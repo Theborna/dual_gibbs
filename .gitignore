@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Numba cache
+__numba_cache__/
+
+# Generated outputs (figures/CSVs are reproducible via experiments.py;
+# uncomment the lines below if you'd rather NOT version them)
+# *.pdf
+# *.csv
+
+# OS / editor cruft
+.DS_Store
+*.swp
+.vscode/
+.idea/
