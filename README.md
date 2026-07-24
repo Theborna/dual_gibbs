@@ -51,7 +51,7 @@ each of the following independently (they do not share state):
 | Fig. 7 — heterogeneous Watts–Strogatz ensemble | `run_convergence_band(ws_hetero_builder(mode="both", n=64, k=4, p=0.3), label="Watts-Strogatz (heterogeneous)", R=64, sweeps=100, n_chains=2000, metric="Eu", band="std", tag="ws_hetero_both", random_init=True, normalize=True)` |
 | Fig. 8 — scan-order robustness | `run_scan_comparison(GMRF_Torus(n=10, s=1.0, sigma=0.3), label="torus10", scans=("random","permutation","fixed"), sweeps=100, n_chains=10_000, tag="scan_torus10")` |
 | Fig. 9 — effect of degree `k` | `run_param_sweep(lambda k: GMRF_K_Regular(100, k, s=1.0, sigma=0.5), values=(2,4,6,8,16,32), value_label="k", sweeps=100, n_chains=20_000, metric="Eu", tag="kreg_N100", normalize=True)` |
-| Fig. 10 — rate vs. `s/sigma` | `run_ratio_sweep(lambda s, sigma: GMRF_K_Regular(5, 4, s=s, sigma=sigma), N=5, sweeps=100, n_chains=5000, metric="mean", show_theory=True, tag="K5")` — writes `ratio_sweep_K5.csv`, rendered in the paper via `pgfplots` (see `paper/` for the `.tex` snippet). |
+| Fig. 10 — rate vs. `s/sigma` | `run_ratio_sweep(lambda s, sigma: GMRF_K_Regular(5, 4, s=s, sigma=sigma), N=5, sweeps=100, n_chains=5000, metric="mean", show_theory=True, tag="K5")` |
 | Fig. 11 — scalability to a `100x100` torus | `run_large_marginal_torus(100, s=1.0, sigma=0.25, sweeps=50, n_chains=600, measure_every=1, normalize=True, random_init=True, seed=0, tag="torus100")` |
 
 **Note:** `n_chains` in the table above matches what was used for the figures
