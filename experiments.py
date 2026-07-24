@@ -457,8 +457,8 @@ def run_convergence(model, label, sweeps=200, n_chains=2000, measure_every=1,
     eu_p, eu_d = _norm(dp["Eu"]), _norm(dd["Eu"])
 
     fig, ax = plt.subplots(figsize=(7, 4.5))
-    ax.plot(sp, eu_p, color=PRIMAL_C, ls="-", lw=1.8, label="Primal Gibbs")
-    ax.plot(sp, eu_d, color=DUAL_C, ls="-", lw=1.8, label="Dual Gibbs (Ours)")
+    ax.plot(sp, eu_p, color=PRIMAL_C, ls="-", lw=1.8, label="Primal")
+    ax.plot(sp, eu_d, color=DUAL_C, ls="-", lw=1.8, label="Dual (Ours)")
     _symlog_setup(ax, eu_p, eu_d)
     ax.set_xlabel("Sweeps")
     ax.set_ylabel(r"$\hat{\mathcal{E}}$" + (r" (norm.)" if normalize else ""))
@@ -470,8 +470,8 @@ def run_convergence(model, label, sweeps=200, n_chains=2000, measure_every=1,
 
     # ---- wall-clock version ----
     fig2, ax2 = plt.subplots(figsize=(7, 4.4))
-    ax2.plot(dp["time"], eu_p, color=PRIMAL_C, ls="-", lw=1.8, label="Primal Gibbs")
-    ax2.plot(dd["time"], eu_d, color=DUAL_C, ls="-", lw=1.8, label="Dual Gibbs (Ours)")
+    ax2.plot(dp["time"], eu_p, color=PRIMAL_C, ls="-", lw=1.8, label="Primal")
+    ax2.plot(dd["time"], eu_d, color=DUAL_C, ls="-", lw=1.8, label="Dual (Ours)")
     _symlog_setup(ax2, eu_p, eu_d)
     ax2.set_xlabel("Wall-clock time (s)")
     ax2.set_ylabel(r"$\hat{\mathcal{E}}$" + (r" (norm.)" if normalize else ""))
@@ -497,7 +497,7 @@ def run_convergence(model, label, sweeps=200, n_chains=2000, measure_every=1,
 # it as a robustness check, not as evidence for a claim broader than
 # random-sweep.
 SCAN_COLORS = {"random": "#1f77b4", "permutation": "#2ca02c", "fixed": "#9467bd"}
-SCAN_LABELS = {"random": "Random scan", "permutation": "Random permutation", "fixed": "Fixed sweep"}
+SCAN_LABELS = {"random": "Random sweep", "permutation": "Random permutation", "fixed": "Fixed sweep"}
 
 
 def run_scan_comparison(model, label, scans=("random", "permutation", "fixed"),
@@ -545,8 +545,8 @@ def run_scan_comparison(model, label, scans=("random", "permutation", "fixed"),
     ax.set_ylabel(r"$\hat{\mathcal{E}}$ (norm.)" if metric == "Eu" else "Error (norm.)")
     ax.set_title(f"Effect of scan order on convergence ({label})")
     leg1 = ax.legend(frameon=True, fontsize=9, loc="upper right", title="Scan order")
-    handles = [Line2D([0], [0], color="k", ls="-", lw=1.5, label="Primal Gibbs"),
-               Line2D([0], [0], color="k", ls="--", lw=1.5, label="Dual Gibbs (Ours)")]
+    handles = [Line2D([0], [0], color="k", ls="-", lw=1.5, label="Primal"),
+               Line2D([0], [0], color="k", ls="--", lw=1.5, label="Dual (Ours)")]
     ax.add_artist(leg1)
     ax.legend(handles=handles, frameon=True, fontsize=9, loc="right")
     plt.tight_layout()
@@ -630,8 +630,8 @@ def run_param_sweep(graph_fn, values, value_label="k", sweeps=200, n_chains=1500
     # an outside-axes legend gets clipped by tight_layout + bbox_inches.
     leg1 = ax.legend(frameon=True, fontsize=8, title=rf"${value_label}$",
                      loc="upper left", ncol=1, framealpha=0.9)
-    handles = [Line2D([0], [0], color="k", ls="-", lw=1.5, label="Primal Gibbs"),
-               Line2D([0], [0], color="k", ls="--", lw=1.5, label="Dual Gibbs (Ours)")]
+    handles = [Line2D([0], [0], color="k", ls="-", lw=1.5, label="Primal"),
+               Line2D([0], [0], color="k", ls="--", lw=1.5, label="Dual (Ours)")]
     ax.add_artist(leg1)
     ax.legend(handles=handles, frameon=True, fontsize=8, loc="lower left", framealpha=0.9)
 
@@ -880,8 +880,8 @@ def run_convergence_band(build_fn, label, R=30, sweeps=200, n_chains=1000,
     fig, ax = plt.subplots(figsize=(7, 4.5))
     ax.fill_between(sp, lp, up, color=PRIMAL_C, alpha=0.18, linewidth=0)
     ax.fill_between(sp, ld, ud, color=DUAL_C, alpha=0.18, linewidth=0)
-    ax.plot(sp, mp, color=PRIMAL_C, ls="-", lw=1.8, label="Primal Gibbs")
-    ax.plot(sp, md, color=DUAL_C, ls="-", lw=1.8, label="Dual Gibbs (Ours)")
+    ax.plot(sp, mp, color=PRIMAL_C, ls="-", lw=1.8, label="Primal")
+    ax.plot(sp, md, color=DUAL_C, ls="-", lw=1.8, label="Dual (Ours)")
     _symlog_setup(ax, mp, md, lp, ld, up, ud)
     ax.set_xlabel("Sweeps")
     ylab = r"$\hat{\mathcal{E}}$ (norm.)" if (metric == "Eu" and normalize) else \
@@ -1044,8 +1044,8 @@ def run_large_marginal_torus(m, s=1.0, sigma=0.25, sweeps=200, n_chains=600,
     sp = dp["sweep"]
     eu_p, eu_d = _norm(dp["Eu"]), _norm(dd["Eu"])
     fig, ax = plt.subplots(figsize=(7, 4.5))
-    ax.plot(sp, eu_p, color=PRIMAL_C, ls="-", lw=1.8, label="Primal Gibbs")
-    ax.plot(sp, eu_d, color=DUAL_C, ls="-", lw=1.8, label="Dual Gibbs (Ours)")
+    ax.plot(sp, eu_p, color=PRIMAL_C, ls="-", lw=1.8, label="Primal")
+    ax.plot(sp, eu_d, color=DUAL_C, ls="-", lw=1.8, label="Dual (Ours)")
     _symlog_setup(ax, eu_p, eu_d)
     ax.set_xlabel("Sweeps")
     ax.set_ylabel(r"$\hat{\mathcal{E}}$" + (r" (norm.)" if normalize else ""))
@@ -1069,7 +1069,7 @@ if __name__ == "__main__":
     # #         the one figure that shows the real, un-rescaled error.
     # run_convergence(GMRF_Torus(n=10, s=1.0, sigma=0.1),
     #                 label="torus10", sweeps=200, n_chains=10_000,
-    #                 tag="torus10", normalize=False, random_init=True)
+    #                 tag="torus10", normalize=False, random_init=False)
 
     # # VIII.B  non-homogeneous, non-regular small-world graph: BAND over
     # #         realizations, normalized (per-curve, from this figure onward).
@@ -1084,6 +1084,13 @@ if __name__ == "__main__":
     # run_ratio_sweep(lambda s, sigma: GMRF_K_Regular(5, 4, s=s, sigma=sigma),
     #                 sweeps=100, n_chains=20_000, metric="Eu", show_theory=True,
     #                 tag="K5_Eu", title=r"Convergence rate vs $s/\sigma$ (Fully connected $|\mathcal{V}|=5$)")
+    
+    
+    # # VIII.C  rate vs s/sigma on a fully connected K5 -- CSV only needed here;
+    # #         the actual figure in the paper is the pgfplots version.
+    # run_ratio_sweep(lambda s, sigma: GMRF_K_Regular(5, 4, s=s, sigma=sigma),
+    #                 sweeps=100, n_chains=20_000, metric="mean", show_theory=True,
+    #                 tag="K5", title=r"Convergence rate vs $s/\sigma$ (Fully connected $|\mathcal{V}|=5$)")
 
     # # Large 100x100 torus: marginal-variance convergence, normalized.
     # run_large_marginal_torus(100, s=1.0, sigma=0.25, sweeps=50, n_chains=600,
@@ -1096,9 +1103,9 @@ if __name__ == "__main__":
     #                     label="torus10", scans=("random", "permutation", "fixed"),
     #                     sweeps=100, n_chains=10_000, tag="scan_torus10")
 
-    # VIII.C  k-sweep: primal (left) vs dual (right), independent y-scales so
-    #         the dual's opposite-direction ordering (improves with k) is visible
-    run_param_sweep(lambda k: GMRF_K_Regular(64, k, s=1.0, sigma=0.25),
-                    values=(2, 4, 8, 16, 32), value_label="k",
-                    sweeps=100, n_chains=20000, metric="Eu", tag="kreg_N64_rand", normalize=True, random_init=True,
-                    title=r"Effect of $k$ on convergence ($k$-regular, $|\mathcal{V}|=100$)")
+    # # VIII.C  k-sweep: primal (left) vs dual (right), independent y-scales so
+    # #         the dual's opposite-direction ordering (improves with k) is visible
+    # run_param_sweep(lambda k: GMRF_K_Regular(64, k, s=1.0, sigma=0.25),
+    #                 values=(2, 4, 8, 16, 32), value_label="k",
+    #                 sweeps=100, n_chains=20000, metric="Eu", tag="kreg_N64_rand", normalize=True, random_init=True,
+    #                 title=r"Effect of $k$ on convergence ($k$-regular, $|\mathcal{V}|=100$)")
