@@ -543,7 +543,7 @@ def run_scan_comparison(model, label, scans=("random", "permutation", "fixed"),
     _symlog_setup(ax, *allv)
     ax.set_xlabel("Sweeps")
     ax.set_ylabel(r"$\hat{\mathcal{E}}$ (norm.)" if metric == "Eu" else "Error (norm.)")
-    ax.set_title(f"Effect of scan order on convergence ({label})")
+    # ax.set_title(f"Effect of scan order on convergence ({label})")
     leg1 = ax.legend(frameon=True, fontsize=9, loc="upper right", title="Scan order")
     handles = [Line2D([0], [0], color="k", ls="-", lw=1.5, label="Primal"),
                Line2D([0], [0], color="k", ls="--", lw=1.5, label="Dual (Ours)")]
@@ -800,7 +800,8 @@ def run_ratio_sweep(graph_fn, ratios=None, sweeps=300, n_chains=1500,
     ax.set_xscale("log")
     ax.set_xlabel(r"$s/\sigma$")
     ax.set_ylabel(r"Empirical decay rate $-\,\mathrm{slope}\,\log\mathcal{E}$")
-    ax.set_title(title or rf"Convergence rate vs $s/\sigma$ ($|\mathcal{{V}}|={N}$)")
+    if title:
+        ax.set_title(title or rf"Convergence rate vs $s/\sigma$ ($|\mathcal{{V}}|={N}$)")
     ax.legend(frameon=True, fontsize=9)
     plt.tight_layout()
     plt.savefig(f"ratio_sweep_{tag}.pdf", bbox_inches="tight")
@@ -1065,11 +1066,11 @@ if __name__ == "__main__":
     #     n_samples=100_000, n_bootstrap=10_000,
     #     tag="variance_conservation_torus8", show_labels=False)
 
-    # # VIII.B  homogeneous 10x10 torus -- RAW SCALE (normalize=False): this is
-    # #         the one figure that shows the real, un-rescaled error.
-    # run_convergence(GMRF_Torus(n=10, s=1.0, sigma=0.1),
-    #                 label="torus10", sweeps=200, n_chains=10_000,
-    #                 tag="torus10", normalize=False, random_init=False)
+    # VIII.B  homogeneous 10x10 torus -- RAW SCALE (normalize=False): this is
+    #         the one figure that shows the real, un-rescaled error.
+    run_convergence(GMRF_Torus(n=10, s=1.0, sigma=0.1),
+                    label="torus10", sweeps=200, n_chains=10_000,
+                    tag="torus10", normalize=False, random_init=True)
 
     # # VIII.B  non-homogeneous, non-regular small-world graph: BAND over
     # #         realizations, normalized (per-curve, from this figure onward).
@@ -1082,9 +1083,8 @@ if __name__ == "__main__":
     # # VIII.C  rate vs s/sigma on a fully connected K5 -- CSV only needed here;
     # #         the actual figure in the paper is the pgfplots version.
     # run_ratio_sweep(lambda s, sigma: GMRF_K_Regular(5, 4, s=s, sigma=sigma),
-    #                 sweeps=100, n_chains=20_000, metric="Eu", show_theory=True,
-    #                 tag="K5_Eu", title=r"Convergence rate vs $s/\sigma$ (Fully connected $|\mathcal{V}|=5$)")
-    
+    #                 sweeps=100, n_chains=20_000, metric="mean", show_theory=True,
+    #                 tag="K5", title=None)#title=r"Convergence rate vs $s/\sigma$ (Fully connected $|\mathcal{V}|=5$)")
     
     # # VIII.C  rate vs s/sigma on a fully connected K5 -- CSV only needed here;
     # #         the actual figure in the paper is the pgfplots version.

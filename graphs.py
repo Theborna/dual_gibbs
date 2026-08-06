@@ -169,7 +169,7 @@ class GMRF_General:
         if random_init:
             # Initialize from scaled random noise
             # Scale by marginal std dev (approx sqrt(diag(Q^{-1})))
-            x = 2 * np.random.randn(self.num_nodes) * self.primal_std
+            x = 1 * np.random.randn(self.num_nodes) * self.primal_std
             # Init at D_s
             # x = np.random.randn(self.num_nodes) * self.s_nodes
         
@@ -200,7 +200,7 @@ class GMRF_General:
         if random_init:
             # Initialize from scaled random noise
             # Scale by marginal std dev (approx sqrt(diag(R^{-1})))
-            x = 2 * np.random.randn(self.num_edges) * self.dual_std
+            x = 1 * np.random.randn(self.num_edges) * self.dual_std
             # Init at D_s
             # x = np.zeros_like(x)
 
